@@ -14,7 +14,7 @@ body{
   background-color: #14532d;
 }
 
-/* From Uiverse.io by mobinkakei */ 
+/* button input name */
 .btn {
   width: 140px;
   height: 40px;
@@ -57,3 +57,4 @@ body{
 .btn:hover .btn-text-two {
   top: 50%;
 }
+
