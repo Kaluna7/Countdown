@@ -2,25 +2,19 @@ import { useEffect } from "react";
 import { InputButton } from "../Components/Input";
 import gsap from "gsap";
 import { useState } from "react";
+import { useRef } from "react";
 
 export default function Banner(){
     const [ enteredPlayerName , setEnteredPlayerName ] = useState(null);
-    const [ submited , setSubmited ] = useState(false);
-
-
-
-    function handleChange(event) {
-        setSubmited(false);
-        setEnteredPlayerName(event.target.value);
-    }
-
+    const playerName = useRef();
 
     function handleName(){
         if(enteredPlayerName){
         const formatName = enteredPlayerName.slice(0,1).toUpperCase() + enteredPlayerName.slice(1);
         setEnteredPlayerName(formatName);
         }
-        setSubmited(true);
+        setEnteredPlayerName(playerName.current.value);
+        playerName.current.value = '';
     }
 
 
@@ -56,11 +50,10 @@ export default function Banner(){
                 <h1 className="text-5xl font-bold font-opensans">THE <span className="text-cyan-400 opacity-0 inline-block" id="almost">ALMOST</span> FINAL COUNTDOWN</h1>
                 <p className="text-2xl">Stop the timer once you estimate that time (is almost) up</p>
             </div>
-            <h1 className="text-white text-2xl">{submited ? "Welcome " + enteredPlayerName : " Please enter your name below ! "}</h1>
+            <h1 className="text-white text-2xl">{enteredPlayerName ?? " Please enter your name below ! "}</h1>
             <InputButton 
-            value={enteredPlayerName}
+            value={playerName}
             onClick={handleName}
-            onAdd={handleChange}
             />
         </div>
     );
